@@ -255,6 +255,8 @@ set wildmode=full
 set wrap
 noremap <leader>w :w<cr>
 noremap <leader>q :q<cr>
+noremap <leader>v :vsp<cr>
+noremap <leader>h :sp<cr>
 runtime! macros/matchit.vim
 
 " -----------------------------------------------------------------------------
