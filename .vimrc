@@ -129,15 +129,15 @@ syntax on
 
 " Heavily inspired by: https://github.com/junegunn/dotfiles/blob/master/vimrc
 function! s:statusline_expr()
-  let mod = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
-  let ro  = "%{&readonly ? '[RO] ' : ''}"
-  let ft  = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
-  let fug = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
-  let sep = ' %= '
-  let pos = ' %-12(%l : %c%V%) '
-  let pct = ' %P'
+let mod = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
+let ro  = "%{&readonly ? '[RO] ' : ''}"
+let ft  = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
+let fug = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
+let sep = ' %= '
+let pos = ' %-12(%l : %c%V%) '
+let pct = ' %P'
 
-  return '[%n] %f %<'.mod.ro.ft.fug.sep.pos.'%*'.pct
+return '[%n] %f %<'.mod.ro.ft.fug.sep.pos.'%*'.pct
 endfunction
 
 let &statusline = s:statusline_expr()
@@ -148,33 +148,33 @@ let &statusline = s:statusline_expr()
 
 " Optimized for gruvbox:hard (both dark and light).
 function! InsertStatuslineColor(mode)
-  if a:mode == 'i'
-    if (&background == 'dark')
-      hi StatusLine ctermfg=109 ctermbg=0 guifg=#83a598 guibg=#000000
-    else
-      hi StatusLine ctermfg=24 ctermbg=255 guifg=#076678 guibg=#ffffff
-    endif
-  elseif a:mode == 'r'
-    if (&background == 'dark')
-      hi StatusLine ctermfg=106 ctermbg=0 guifg=#98971a guibg=#000000
-    else
-      hi StatusLine ctermfg=100 ctermbg=255 guifg=#79740e guibg=#ffffff
-    endif
+if a:mode == 'i'
+  if (&background == 'dark')
+    hi StatusLine ctermfg=109 ctermbg=0 guifg=#83a598 guibg=#000000
   else
-    if (&background == 'dark')
-      hi StatusLine ctermfg=166 ctermbg=0 guifg=#d65d0e guibg=#000000
-    else
-      hi StatusLine ctermfg=88 ctermbg=255 guifg=#9d0006 guibg=#ffffff
-    endif
+    hi StatusLine ctermfg=24 ctermbg=255 guifg=#076678 guibg=#ffffff
   endif
+elseif a:mode == 'r'
+  if (&background == 'dark')
+    hi StatusLine ctermfg=106 ctermbg=0 guifg=#98971a guibg=#000000
+  else
+    hi StatusLine ctermfg=100 ctermbg=255 guifg=#79740e guibg=#ffffff
+  endif
+else
+  if (&background == 'dark')
+    hi StatusLine ctermfg=166 ctermbg=0 guifg=#d65d0e guibg=#000000
+  else
+    hi StatusLine ctermfg=88 ctermbg=255 guifg=#9d0006 guibg=#ffffff
+  endif
+endif
 endfunction
 
 function! InsertLeaveActions()
-  if (&background == 'dark')
-    au InsertLeave * hi StatusLine ctermfg=239 ctermbg=223 guifg=#504945 guibg=#ebdbb2
-  else
-    au InsertLeave * hi StatusLine ctermfg=250 ctermbg=0 guifg=#d5c4a1 guibg=#000000
-  endif
+if (&background == 'dark')
+  au InsertLeave * hi StatusLine ctermfg=239 ctermbg=223 guifg=#504945 guibg=#ebdbb2
+else
+  au InsertLeave * hi StatusLine ctermfg=250 ctermbg=0 guifg=#d5c4a1 guibg=#000000
+endif
 endfunction
 
 au InsertEnter * call InsertStatuslineColor(v:insertmode)
@@ -257,6 +257,8 @@ noremap <leader>w :w<cr>
 noremap <leader>q :q<cr>
 noremap <leader>v :vsp<cr>
 noremap <leader>h :sp<cr>
+noremap <leader>sh :!./%<cr>
+noremap <leader>py :!python %<cr>
 runtime! macros/matchit.vim
 
 " -----------------------------------------------------------------------------
