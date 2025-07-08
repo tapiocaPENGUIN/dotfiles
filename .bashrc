@@ -95,6 +95,7 @@ alias v='nvim'
 alias code='cd ~/code'
 alias cp='cp -v'
 alias ev='nvim ~/.config/nvim/init.vim'
+alias rr='~/code/run_rust'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
